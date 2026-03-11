@@ -6,380 +6,603 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
 :root {
---bg: #111111;
---card: #1c1c1c;
---accent: #e53935; /* chili red */
---accent-soft: #ffcc80;
---text-main: #ffffff;
---text-muted: #c7c7c7;
+  --bg: #0d0d0d;
+  --card: #181818;
+  --card-elevated: #1f1f1f;
+  --accent: #e53935;
+  --accent-soft: #ffcc80;
+  --accent-glow: rgba(229, 57, 53, 0.2);
+  --text-main: #ffffff;
+  --text-muted: #a0a0a0;
+  --border: rgba(255, 255, 255, 0.08);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
 }
+
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-background: radial-gradient(circle at top, #2b2b2b 0, #000000 55%);
-color: var(--text-main);
-padding: 16px 14px 28px;
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, #1a1515 0%, #0d0d0d 50%);
+  color: var(--text-main);
+  padding: 0 0 40px;
+  min-height: 100vh;
 }
+
 .app {
-max-width: 480px;
-margin: 0 auto;
+  max-width: 480px;
+  margin: 0 auto;
 }
+
+/* —— HEADER / BRANDING —— */
 .header {
-display: flex;
-align-items: center;
-gap: 12px;
-margin-bottom: 10px;
+  position: relative;
+  padding: 20px 18px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
 }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.halal-badge {
+  padding: 0;
+  text-align: center;
+}
+
+.halal-logo {
+  display: block;
+  width: 125px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 .logo {
-width: 64px;
-height: 64px;
-border-radius: 50%;
-overflow: hidden;
-border: 2px solid var(--accent-soft);
-background: #000;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: 800;
-font-size: 11px;
-text-align: center;
-padding: 6px;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--accent-soft);
+  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 1.2;
+  text-align: center;
+ 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .branding-title {
-font-size: 22px;
-font-weight: 800;
-letter-spacing: 0.06em;
-text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-soft) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
 .sub {
-font-size: 11px;
-text-transform: uppercase;
-letter-spacing: 0.16em;
-color: var(--text-muted);
-margin-top: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
+
 .pill {
-display: inline-flex;
-align-items: center;
-gap: 4px;
-padding: 4px 8px;
-border-radius: 100px;
-background: rgba(255, 255, 255, 0.06);
-font-size: 11px;
-color: var(--accent-soft);
-margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, rgba(255,204,128,0.12) 0%, rgba(229,57,53,0.08) 100%);
+  border: 1px solid rgba(255,204,128,0.2);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent-soft);
+  margin-top: 8px;
 }
+
 .location {
-font-size: 11px;
-color: var(--text-muted);
-margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
+
+/* —— NAVBAR —— */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.nav-inner {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-soft);
+  background: rgba(255,255,255,0.04);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(229,57,53,0.4), rgba(229,57,53,0.2));
+  border-color: rgba(229,57,53,0.4);
+}
+
+/* —— MENU WRAPPER —— */
 .menu-wrapper {
-margin-top: 16px;
-background: rgba(0, 0, 0, 0.3);
-border-radius: 18px;
-padding: 12px 10px 16px;
-border: 1px solid rgba(255, 255, 255, 0.06);
-box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-backdrop-filter: blur(10px);
+  margin: 0;
+  padding: 20px 16px 24px;
 }
+
 .tagline {
-font-size: 12px;
-text-transform: uppercase;
-letter-spacing: 0.18em;
-color: var(--accent-soft);
-margin-bottom: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-soft);
+  opacity: 0.9;
+  margin-bottom: 20px;
 }
-.divider {
-border: none;
-border-top: 1px dashed rgba(255, 255, 255, 0.15);
-margin: 8px 0 10px;
-}
+
+/* —— CATEGORY SECTIONS —— */
 .menu-section {
-margin-bottom: 12px;
+  margin-bottom: 28px;
+  scroll-margin-top: 70px;
 }
+
+.menu-section:last-of-type {
+  margin-bottom: 20px;
+}
+
 .menu-section-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent);
+  border-radius: 0 0 4px 4px;
 }
+
 .menu-section-title {
-font-size: 14px;
-text-transform: uppercase;
-letter-spacing: 0.1em;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(229,57,53,0.2);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
 .section-label {
-font-size: 10px;
-text-transform: uppercase;
-color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
 }
+
+/* —— MENU ITEMS —— */
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .menu-item {
-padding: 7px 6px 6px;
-border-radius: 10px;
-transition: background 0.18s ease;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
+
 .menu-item:hover {
-background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border);
 }
+
 .menu-item-main {
-display: flex;
-justify-content: space-between;
-align-items: baseline;
-gap: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
+
 .item-name {
-font-size: 13px;
-font-weight: 600;
-text-transform: uppercase;
-letter-spacing: 0.05em;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
+
 .item-price {
-font-size: 13px;
-font-weight: 700;
-color: var(--accent-soft);
-white-space: nowrap;
-margin-left: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent-soft);
+  white-space: nowrap;
 }
+
 .item-desc {
-font-size: 11px;
-color: var(--text-muted);
-margin-top: 2px;
-line-height: 1.35;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.45;
 }
+
 .spicy-tag {
-display: inline-flex;
-align-items: center;
-gap: 3px;
-font-size: 10px;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-color: var(--accent-soft);
-margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-left: 6px;
+  opacity: 0.9;
 }
+
+/* —— SIDES / CHIPS —— */
 .chips-row {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
 }
+
 .small-pill {
-border-radius: 999px;
-border: 1px solid rgba(255,255,255,0.08);
-padding: 3px 7px;
-font-size: 10px;
-color: var(--text-muted);
+  padding: 8px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.02);
+  transition: all 0.2s ease;
 }
+
+.small-pill:hover {
+  border-color: rgba(255,204,128,0.3);
+  color: var(--accent-soft);
+}
+
+/* —— DIVIDER —— */
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 24px 0;
+}
+
+/* —— CTA BUTTONS —— */
 .cta-stack {
-margin-top: 16px;
-display: flex;
-flex-direction: column;
-gap: 8px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
 .btn {
-width: 100%;
-border-radius: 999px;
-padding: 10px 14px;
-font-size: 13px;
-font-weight: 600;
-text-transform: uppercase;
-letter-spacing: 0.12em;
-border: none;
-cursor: pointer;
+  width: 100%;
+  border-radius: 100px;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
 .btn-primary {
-background: linear-gradient(135deg, #ff7043, var(--accent));
-color: #fff;
-box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(135deg, #ff7043 0%, var(--accent) 100%);
+  color: #fff;
+  box-shadow: 0 8px 24px var(--accent-glow);
 }
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+
 .btn-ghost {
-background: transparent;
-border: 1px solid rgba(255,255,255,0.16);
-color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
 }
+
+.btn-ghost:hover {
+  border-color: rgba(255,204,128,0.3);
+  color: var(--accent-soft);
+}
+
 .btn span {
-font-size: 11px;
-display: block;
-text-transform: none;
-letter-spacing: 0;
-opacity: 0.8;
-margin-top: 2px;
+  font-size: 11px;
+  display: block;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.85;
+  margin-top: 3px;
+  font-weight: 500;
 }
+
 .footer {
-margin-top: 16px;
-font-size: 10px;
-text-align: center;
-color: var(--text-muted);
-opacity: 0.85;
+  margin-top: 20px;
+  padding-top: 16px;
+  font-size: 10px;
+  text-align: center;
+  color: var(--text-muted);
+  opacity: 0.8;
+  border-top: 1px solid var(--border);
 }
+
 .footer strong {
-color: var(--accent-soft);
+  color: var(--accent-soft);
 }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="app">
-<!-- TOP BRANDING -->
-<header class="header">
-<!-- Replace this div with an <img> if you host your logo -->
-<!-- Example:
-<img src="logo.png" alt="Late Grub Spot logo" class="logo" />
--->
-<div class="logo">
-LATE<br />GRUB<br />SPOT
+  <!-- HALAL BADGE -->
+  <div class="halal-badge">
+    <img src="halal-logo.png" alt="Halal certified" class="halal-logo" />
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <img src="my-logo.jpg" alt="Late Grub Spot" />
+      </div>
+      <div>
+        <div class="branding-title">Late Grub Spot</div>
+        <div class="sub">Burgers • Dogs • Bowls</div>
+        <div class="pill">🔥 Street Eats • Late Night</div>
+        <div class="location">Lodi, California</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Menu categories">
+    <div class="nav-inner">
+      <a href="#hot-dogs" class="nav-link">Hot Dogs</a>
+      <a href="#burgers" class="nav-link">Burgers</a>
+      <a href="#bowls" class="nav-link">Bowls</a>
+      <a href="#sides" class="nav-link">Sides & Drinks</a>
+    </div>
+  </nav>
+
+  <!-- MENU -->
+  <main class="menu-wrapper">
+    <div class="tagline">Menu</div>
+
+    <section class="menu-section" id="hot-dogs">
+      <div class="menu-section-header">
+        <h2 class="menu-section-title"><span class="section-icon">🌭</span> Hot Dogs</h2>
+        <span class="section-label">All-beef dogs</span>
+      </div>
+      <div class="menu-items">
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">Hotdog</div>
+            <div class="item-price">$10</div>
+          </div>
+          <p class="item-desc">Mayo, ketchup, mustard, chipotle, onions.</p>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div>
+              <span class="item-name">Deluxe Dog</span>
+              <span class="spicy-tag">🌶 spicy option</span>
+            </div>
+            <div class="item-price">$14</div>
+          </div>
+          <p class="item-desc">Bacon, jalapeños, cheese, onions, ketchup, mustard, chipotle.</p>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="menu-section" id="burgers">
+      <div class="menu-section-header">
+        <h2 class="menu-section-title"><span class="section-icon">🍔</span> Burgers</h2>
+        <span class="section-label">Smash-style</span>
+      </div>
+      <div class="menu-items">
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">Hamburger</div>
+            <div class="item-price">$10</div>
+          </div>
+          <p class="item-desc">No cheese. Lettuce, tomato, onions, house sauces.</p>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">Dash &amp; Smash</div>
+            <div class="item-price">$12</div>
+          </div>
+          <p class="item-desc">Classic smash burger with ketchup &amp; mustard.</p>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">The Works</div>
+            <div class="item-price">$12</div>
+          </div>
+          <p class="item-desc">Hamburger with tomato, lettuce, cheese, onions, ketchup, mustard, chipotle sauce.</p>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">Hangry</div>
+            <div class="item-price">$18</div>
+          </div>
+          <p class="item-desc">Double meat, cheese, onions, lettuce, tomato, chipotle, ketchup, mustard.</p>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">BellyRub</div>
+            <div class="item-price">$20</div>
+          </div>
+          <p class="item-desc">Tomato, lettuce, double meat, cheese, bacon.</p>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div>
+              <span class="item-name">A La Brava</span>
+              <span class="spicy-tag">🌶 spicy option</span>
+            </div>
+            <div class="item-price">$16</div>
+          </div>
+          <p class="item-desc">Jalapeño, bacon, lettuce, tomato, cheese, onions.</p>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="menu-section" id="bowls">
+      <div class="menu-section-header">
+        <h2 class="menu-section-title"><span class="section-icon">🥗</span> Bowls</h2>
+        <span class="section-label">Protein packed</span>
+      </div>
+      <div class="menu-items">
+        <article class="menu-item">
+          <div class="menu-item-main">
+            <div class="item-name">The Arnold</div>
+            <div class="item-price">$17</div>
+          </div>
+          <p class="item-desc">Protein bowl with lettuce, tomato, onions, jalapeños, cheese, house sauce.</p>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="menu-section" id="sides">
+      <div class="menu-section-header">
+        <h2 class="menu-section-title"><span class="section-icon">🥤</span> Sides &amp; Drinks</h2>
+        <span class="section-label">Grab &amp; go</span>
+      </div>
+      <div class="chips-row">
+        <div class="small-pill">Soda — $3</div>
+        <div class="small-pill">Chips — $2</div>
+        <div class="small-pill">Water — $2</div>
+      </div>
+    </section>
+
+    <div class="cta-stack">
+      <button class="btn btn-primary" type="button">
+        VIEW FULL MENU
+        <span>Scroll to see everything</span>
+      </button>
+      <button class="btn btn-ghost" type="button"
+        onclick="window.open('https://instagram.com/late_gspot', '_blank')">
+        VIEW OUR INSTAGRAM
+        <span>@late_gspot</span>
+      </button>
+    </div>
+    <p class="footer">
+      Menu &amp; prices subject to change. <strong>Late Grub Spot</strong> • Lodi, CA
+    </p>
+  </main>
 </div>
-<div>
-<div class="branding-title">Late Grub Spot</div>
-<div class="sub">Burgers • Dogs • Bowls</div>
-<div class="pill">🔥 Street Eats • Late Night</div>
-<div class="location">Lodi, California</div>
-</div>
-</header>
-<!-- MENU CARD -->
-<main class="menu-wrapper">
-<div class="tagline">Menu</div>
-<!-- HOT DOGS -->
-<section class="menu-section">
-<div class="menu-section-header">
-<h2 class="menu-section-title">Hot Dogs</h2>
-<div class="section-label">All-beef dogs</div>
-</div>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">Hotdog</div>
-<div class="item-price">$10</div>
-</div>
-<p class="item-desc">
-Mayo, ketchup, mustard, chipotle, onions.
-</p>
-</article>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">The Works</div>
-<div class="item-price">$12</div>
-</div>
-<p class="item-desc">
-Tomato, lettuce, cheese, onions, ketchup, mustard, chipotle sauce.
-</p>
-</article>
-<article class="menu-item">
-<div class="menu-item-main">
-<div>
-<span class="item-name">Deluxe Dog</span>
-<span class="spicy-tag">🌶 spicy option</span>
-</div>
-<div class="item-price">$18</div>
-</div>
-<p class="item-desc">
-Bacon, jalapeños, cheese, onions, ketchup, mustard, chipotle.
-</p>
-</article>
-</section>
-<hr class="divider" />
-<!-- BURGERS -->
-<section class="menu-section">
-<div class="menu-section-header">
-<h2 class="menu-section-title">Burgers</h2>
-<div class="section-label">Smash-style</div>
-</div>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">Hamburger</div>
-<div class="item-price">$10</div>
-</div>
-<p class="item-desc">
-No cheese. Lettuce, tomato, onions, house sauces.
-</p>
-</article>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">Dash &amp; Smash</div>
-<div class="item-price">$12</div>
-</div>
-<p class="item-desc">
-Classic smash burger with ketchup &amp; mustard.
-</p>
-</article>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">Hangry</div>
-<div class="item-price">$18</div>
-</div>
-<p class="item-desc">
-Double meat, cheese, onions, lettuce, tomato, chipotle, ketchup, mustard.
-</p>
-</article>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">BellyRub</div>
-<div class="item-price">$20</div>
-</div>
-<p class="item-desc">
-Tomato, lettuce, double meat, cheese, bacon.
-</p>
-</article>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">A La Brava</div>
-<div class="item-price">$16</div>
-</div>
-<p class="item-desc">
-Jalapeño, bacon, lettuce, tomato, cheese, onions.
-</p>
-</article>
-</section>
-<hr class="divider" />
-<!-- BOWLS -->
-<section class="menu-section">
-<div class="menu-section-header">
-<h2 class="menu-section-title">Bowls</h2>
-<div class="section-label">Protein packed</div>
-</div>
-<article class="menu-item">
-<div class="menu-item-main">
-<div class="item-name">The Arnold</div>
-<div class="item-price">$17</div>
-</div>
-<p class="item-desc">
-Protein bowl with lettuce, tomato, onions, jalapeños, cheese, house sauce.
-</p>
-</article>
-</section>
-<hr class="divider" />
-<!-- SIDES & DRINKS -->
-<section class="menu-section">
-<div class="menu-section-header">
-<h2 class="menu-section-title">Sides &amp; Drinks</h2>
-<div class="section-label">Grab &amp; go</div>
-</div>
-<div class="chips-row">
-<div class="small-pill">Soda — $3</div>
-<div class="small-pill">Chips — $2</div>
-<div class="small-pill">Water — $2</div>
-</div>
-</section>
-<!-- CTA BUTTONS -->
-<div class="cta-stack">
-<!-- This is just a visual button, not needed for QR.
-QR should go directly to this page URL. -->
-<button class="btn btn-primary" type="button">
-VIEW FULL MENU
-<span>Scroll to see everything</span>
-</button>
-<!-- Instagram button -->
-<button class="btn btn-ghost" type="button"
-onclick="window.open('https://instagram.com/late_gspot', '_blank')">
-VIEW OUR INSTAGRAM
-<span>@late_gspot</span>
-</button>
-</div>
-<p class="footer">
-Menu &amp; prices subject to change. <strong>Late Grub Spot</strong> • Lodi, CA
-</p>
-</main>
-</div>
+
+<script>
+(function() {
+  const sections = document.querySelectorAll('.menu-section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  if (!sections.length || !navLinks.length) return;
+
+  function setActive(id) {
+    navLinks.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+    });
+  }
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(function(s) { observer.observe(s); });
+})();
+</script>
 </body>
 </html>
